@@ -1,7 +1,8 @@
 public class Goods {
+    public static int index=0;
     int id;
     String pDate;
-    String name;
+    private String name;
     int price;
     float discount;
 
@@ -20,6 +21,14 @@ public class Goods {
         this.price = price;
         this.discount = discount;
 
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     void inform() {

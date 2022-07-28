@@ -3,10 +3,11 @@ import java.util.Scanner;
 
 public class Supermarket {
     public static void main(String[] args) {
+
         System.out.println("재민마켓 온 것을 환영합니다!!!");
         Scanner scanner = new Scanner(System.in);
         Goods[] goodsArr = new Goods[5];
-        int index = 0;
+
         boolean onoff = true;
         int menu = 0;
 
@@ -31,7 +32,7 @@ public class Supermarket {
             }
             switch (menu){
                 case 1:
-                    if(index >=5){
+                    if(Goods.index >=5){
                         System.out.println("등록 칸이 다 찼습니다.");
                         continue;
                     }
@@ -44,14 +45,16 @@ public class Supermarket {
                         int price = scanner.nextInt();
 
                         if(pDate.equals("0")){
-                            goodsArr[index] = new Goods(index, name, price);
+                            goodsArr[Goods.index%5] = new Goods(Goods.index, name, price);
                         }
                         else {
                             System.out.print("할인율 입력>> ");
                             float discount = scanner.nextFloat();
-                            goodsArr[index] = new Goods(index, pDate, name, price, discount);
+                            goodsArr[Goods.index%5] = new Goods(Goods.index, pDate, name, price, discount);
                         }
-                        index++;
+
+                        Goods.index++;
+                        System.gc();
                     }
                     break;
                 case 2:
@@ -62,8 +65,9 @@ public class Supermarket {
                 case 3:
                     System.out.print("상품ID를 입력해주세요>>");
                     int i = scanner.nextInt();
-                    System.out.println(goodsArr[i].name+"의 가격은 "+goodsArr[i].discountedPrice() + "원입니다");
-                   /* if(select  >= index){
+                    System.out.println(goodsArr[i].getName()+"의 가격은 "+goodsArr[i].discountedPrice() + "원입니다");
+
+                    /* if(select  >= index){
                         System.out.println("해당하신 물품은 존재하지 않습니다.");
                         break;
                     }
@@ -94,9 +98,18 @@ public class Supermarket {
        // price = (int)(price-price*(discount/100));
 
         System.out.println(goods + "의 가격은 " + price + "원입니다.");*/
+
         scanner.close();
         System.out.println("이용해주셔서 감사합니다");
 
+ /*
+       test a = new test();
+        test b=  new test();
 
+        a.n =0;
+        b.n =10;
+        int sum = Calculate.increase(a,b);
+        System.out.println(a.n+", " + sum);
+        */
     }
 }
