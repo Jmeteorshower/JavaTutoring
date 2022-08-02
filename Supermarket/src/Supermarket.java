@@ -2,6 +2,11 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Supermarket {
+   /* public static void inform (Goods goods){
+        goods.inform();
+    }
+    */
+
     public static void main(String[] args) {
 
         System.out.println("재민마켓 온 것을 환영합니다!!!");
@@ -50,22 +55,30 @@ public class Supermarket {
                         else {
                             System.out.print("할인율 입력>> ");
                             float discount = scanner.nextFloat();
-                            goodsArr[Goods.index%5] = new Goods(Goods.index, pDate, name, price, discount);
+                            System.out.print("유통깋나을 입력해주세요.>>");
+                            String eDate = scanner.next();
+                            if(eDate.equals("0")){
+                                goodsArr[Goods.index%5] = new Goods(Goods.index, pDate, name, price, discount);
+                            }
+                            else{//업캐스팅
+                                goodsArr[Goods.index%5] = new FreshFood(Goods.index,pDate,name, price, discount,eDate);
+                            }
                         }
 
                         Goods.index++;
-                        System.gc();
+                        System.gc(); //객체 소멸
                     }
                     break;
                 case 2:
-                    for(int i=0; i<goodsArr.length; i++){
+                    for(int i=0; i<goodsArr.length; i++) {
                         goodsArr[i].inform();
+                        //inform(goodsArr[n]);
                     }
                     break;
                 case 3:
                     System.out.print("상품ID를 입력해주세요>>");
                     int i = scanner.nextInt();
-                    System.out.println(goodsArr[i].getName()+"의 가격은 "+goodsArr[i].discountedPrice() + "원입니다");
+                    System.out.println(goodsArr[i%5].getName()+"의 가격은 "+goodsArr[i%5].discountedPrice() + "원입니다");
 
                     /* if(select  >= index){
                         System.out.println("해당하신 물품은 존재하지 않습니다.");
